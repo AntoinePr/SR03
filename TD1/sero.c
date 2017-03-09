@@ -44,6 +44,7 @@ int main(int argc, char** argv){
 		else{//fils, socket de service
 			do{
 				if(recv(newsd,&objet,sizeof(objet),0)<0)exit(-1);
+				sleep(1);
 				printf("Objet reçu: '%s' \n",objet);
 				strcpy(returnMsg, "Objet reçu !");
 				send(newsd,returnMsg,sizeof(returnMsg),0);
