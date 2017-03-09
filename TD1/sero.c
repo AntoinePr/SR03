@@ -49,7 +49,7 @@ int main(int argc, char** argv){
 				//sleep(1);
 				printf("\n");
 				
-				// Temp fix
+				// Temporary fix
 				if(strcmp(objet,"")==0){
 					continue;
 				}
@@ -74,7 +74,7 @@ int main(int argc, char** argv){
 							// Clean of data variable
 							strcpy(data, "");
 						}
-						// Else we continue to collect the data
+						// Else we continue collecting the data
 						else {
 							printf("Data package received\n");
 							strcpy(returnMsg, "Data package received\n");
