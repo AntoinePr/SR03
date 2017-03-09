@@ -10,3 +10,7 @@ gcc -Wall -o sero sero.c
 TODO:
 	-	Transmettre un objet au lieu d'un simple string
 	-	Résoudre le problème de réception d'un deuxième message vide côté serveur
+	-	Fermer les sockets avant d'arrêter les processus
+	
+	-	Modifier le programme pour qu'il corresponde à une encapsulation de données
+	
