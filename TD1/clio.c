@@ -8,7 +8,7 @@
 
 int main(int argc, char** argv){
 	int sd; struct hostent *hp;
-	char objet[40], response[40];
+	char objet[40], response[100];
 	struct sockaddr_in sin;
 	sd =socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
 	bzero(&sin,sizeof(sin));
@@ -23,7 +23,7 @@ int main(int argc, char** argv){
 	do{
 		printf("Que voulez-vous envoyer ? \n");
 		scanf("%s",objet);
-		send(sd,&objet,sizeof(objet),0);
+		send(sd,&objet,sizeof(char)*(int)strlen(objet),0);
 		
 		if(recv(sd,&response,sizeof(response),0)<0)exit(-1);
 		printf("Retour serveur: %s\n",response);

@@ -50,9 +50,9 @@ int main(int argc, char** argv){
 				printf("\n");
 				
 				// Temporary fix
-				if(strcmp(objet,"")==0){
+				/*if(strcmp(objet,"")==0){
 					continue;
-				}
+				}*/
 				
 				// Starting to collect data
 				if(strcmp(objet,"<<<<")==0){
