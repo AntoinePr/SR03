@@ -23,7 +23,7 @@ int main(int argc, char** argv){
 	do{
 		printf("Que voulez-vous envoyer ? \n");
 		scanf("%s",objet);
-		send(sd,&objet,sizeof(char)*(int)strlen(objet),0);
+		send(sd,&objet,sizeof(char)*((int)strlen(objet)+1),0);
 		
 		if(recv(sd,&response,sizeof(response),0)<0)exit(-1);
 		printf("Retour serveur: %s\n",response);
