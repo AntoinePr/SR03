@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <netdb.h>
+#include <unistd.h>
 
 int main(int argc, char** argv){
 	int sd; struct hostent *hp;
@@ -29,5 +30,6 @@ int main(int argc, char** argv){
 		printf("Retour serveur: %s\n",response);
 		
 	}while(strcmp(objet,"-1")!=0);
+	close(sd);
 	return -1;
 }

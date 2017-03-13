@@ -91,9 +91,11 @@ int main(int argc, char** argv){
 				send(newsd,returnMsg,sizeof(returnMsg),0);
 				
 			}while(strcmp(objet,"-1")!=0);
+			shutdown(newsd,SHUT_RDWR);
+			close(newsd);
 			exit(0);
 		}
 	}while(1);
-
+	close(sd);
 	return status;
 }
