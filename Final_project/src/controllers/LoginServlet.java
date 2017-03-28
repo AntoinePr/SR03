@@ -7,9 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-
 /**
  * Servlet implementation class LoginServlet
  */
@@ -48,8 +45,6 @@ public class LoginServlet extends HttpServlet {
 			{
 				cible = "espaceAdmin.jsp";
 				request.getSession().setAttribute("nomV", "admin");
-				
-				Logger.getLogger("rootLogger").log(Level.INFO, u+"s'est connecté depuis : "+request.getRemoteAddr());
 			}
 			else
 				request.setAttribute("errorMsg", "identifiants incorrects");
