@@ -29,7 +29,7 @@ CREATE TABLE Plateforme(
 CREATE TABLE Commentaire(
 	jeu VARCHAR REFERENCES Jeux(nom),
 	adh VARCHAR REFERENCES Adherent(login),
-	description VARCHAR,
+	description TEXT,
 	dateCom DATE,
 	PRIMARY KEY(jeu,adh,dateCom)
 );
@@ -60,21 +60,58 @@ VALUES('Bethesda','48215151100029');
 INSERT INTO editeur (raisonSociale,siret)
 VALUES('Blizzard','48995245700039');
 INSERT INTO jeux (nom,prix,dateSortie,editeur,description)
-VALUES('Skyrim',29.99,TO_DATE('07-06-2013','DD-MM-YYYY'),'48215151100029','Description bien écrite');
+VALUES('Skyrim',29.99,TO_DATE('07-06-2013','DD-MM-YYYY'),'48215151100029','Description bien ecrite');
 INSERT INTO jeux (nom,prix,dateSortie,editeur,description)
 VALUES('Starcraft II',39.90,TO_DATE('29-11-2016','DD-MM-YYYY'),'48995245700039','Desc du jeu trop bien');
 INSERT INTO jeux (nom,prix,dateSortie,editeur,description)
-VALUES();
-INSERT INTO VALUES();
-INSERT INTO VALUES();
-INSERT INTO VALUES();
-INSERT INTO VALUES();
-INSERT INTO VALUES();
-INSERT INTO VALUES();
-INSERT INTO VALUES();
-INSERT INTO VALUES();
-INSERT INTO VALUES();
-INSERT INTO VALUES();
-INSERT INTO VALUES();
-INSERT INTO VALUES();
-INSERT INTO VALUES();
+VALUES('Fallout 4',16.32,TO_DATE('10-11-2015','DD-MM-YYYY'),'48215151100029','Abri 111');
+INSERT INTO Type
+VALUES('RTS');
+INSERT INTO Type
+VALUES('RPG');
+INSERT INTO Type
+VALUES('Jeux de role');
+INSERT INTO Plateforme
+VALUES('XBOX One');
+INSERT INTO Plateforme
+VALUES('PS4');
+INSERT INTO Plateforme
+VALUES('PC');
+INSERT INTO support (jeu,platef)
+VALUES('Fallout 4','XBOX One');
+INSERT INTO support(jeu,platef)
+VALUES('Skyrim','PC');
+INSERT INTO support(jeu,platef)
+VALUES('Skyrim','PS4');
+INSERT INTO support(jeu,platef)
+VALUES('Skyrim','XBOX One');
+INSERT INTO support(jeu,platef)
+VALUES('Starcraft II','PC');
+INSERT INTO appartient(jeu,typ)
+VALUES('Skyrim','Jeux de role');
+INSERT INTO appartient(jeu,typ)
+VALUES('Skyrim','RPG');
+INSERT INTO appartient(jeu,typ)
+VALUES('Fallout 4','Jeux de role');
+INSERT INTO appartient(jeu,typ)
+VALUES('Fallout 4','RPG');
+INSERT INTO appartient(jeu,typ)
+VALUES('Starcraft II','RTS');
+INSERT INTO achats(jeu,adh)
+VALUES('jonpie','Starcraft II');
+INSERT INTO achats(jeu,adh)
+VALUES('jonpie','Skyrim');
+INSERT INTO achats(jeu,adh)
+VALUES('jonpie','Fallout 4');
+INSERT INTO achats(jeu,adh)
+VALUES('marben','Fallout 4');
+INSERT INTO achats(jeu,adh)
+VALUES('marben','Skyrim');
+INSERT INTO achats(jeu,adh)
+VALUES('proant','Starcraft II');
+INSERT INTO commentaire(jeu,adh,description,dateCom)
+VALUES('marben','Skyrim','Meilleur jeu de tout les temps',TO_DATE('15-12-2016','DD-MM-YYYY'));
+INSERT INTO commentaire(jeu,adh,description,dateCom)
+VALUES('marben','Fallout 4','Comme Skyrim',TO_DATE('15-12-2016','DD-MM-YYYY'));
+INSERT INTO commentaire(jeu,adh,description,dateCom)
+VALUES('proant','Starcraft II','Choque decu',TO_DATE('15-12-2016','DD-MM-YYYY'));
