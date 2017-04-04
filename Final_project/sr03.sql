@@ -19,7 +19,7 @@ CREATE TABLE Jeux(
 	prix FLOAT,
 	description VARCHAR,
 	dateSortie DATE,
-	editeur INTEGER REFERENCES Editeur(siret) NOT NULL
+	editeur CHAR(14) REFERENCES Editeur(siret) NOT NULL
 );
 CREATE TABLE Type(
 	nomType VARCHAR PRIMARY KEY
