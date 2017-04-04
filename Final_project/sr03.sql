@@ -11,7 +11,7 @@ CREATE TABLE Adherent (
 );
 CREATE TABLE Editeur(
 	raisonSociale VARCHAR UNIQUE NOT NULL,
-	siret INTEGER PRIMARY KEY,
+	siret CHAR(14) PRIMARY KEY,
 	CHECK(siret>0)
 );
 CREATE TABLE Jeux(
@@ -70,7 +70,8 @@ Points forts
 - Menez d’immenses campagnes militaires – Plongez au cœur de trois campagnes en solo palpitantes et menez à bien plus de 70 missions.
 
 - Combattez avec ou contre les autres – Alliez-vous à d’autres joueurs grâce au mode Commandant en coop ou mesurez-vous à eux grâce aux ligues compétitives de tous niveaux. ");
-INSERT INTO VALUES();
+INSERT INTO jeux (nom,prix,dateSortie,editeur,description)
+VALUES();
 INSERT INTO VALUES();
 INSERT INTO VALUES();
 INSERT INTO VALUES();
