@@ -60,9 +60,9 @@ VALUES('Bethesda','48215151100029');
 INSERT INTO editeur (raisonSociale,siret)
 VALUES('Blizzard','48995245700039');
 INSERT INTO jeux (nom,prix,dateSortie,editeur,description)
-VALUES('Skyrim',29.99,TO_DATE('07-06-2013','DD-MM-YYYY'),'48215151100029',"Description bien écrite");
+VALUES('Skyrim',29.99,TO_DATE('07-06-2013','DD-MM-YYYY'),'48215151100029','Description bien écrite');
 INSERT INTO jeux (nom,prix,dateSortie,editeur,description)
-VALUES('Starcraft II',39.90,TO_DATE('29-11-2016','DD-MM-YYYY'),'48995245700039',"Desc du jeu trop bien");
+VALUES('Starcraft II',39.90,TO_DATE('29-11-2016','DD-MM-YYYY'),'48995245700039','Desc du jeu trop bien');
 INSERT INTO jeux (nom,prix,dateSortie,editeur,description)
 VALUES();
 INSERT INTO VALUES();
