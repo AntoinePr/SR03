@@ -97,21 +97,21 @@ INSERT INTO appartient(jeu,typ)
 VALUES('Fallout 4','RPG');
 INSERT INTO appartient(jeu,typ)
 VALUES('Starcraft II','RTS');
-INSERT INTO achats(jeu,adh)
+INSERT INTO achats(adh,jeu)
 VALUES('jonpie','Starcraft II');
-INSERT INTO achats(jeu,adh)
+INSERT INTO achats(adh,jeu)
 VALUES('jonpie','Skyrim');
-INSERT INTO achats(jeu,adh)
+INSERT INTO achats(adh,jeu)
 VALUES('jonpie','Fallout 4');
-INSERT INTO achats(jeu,adh)
+INSERT INTO achats(adh,jeu)
 VALUES('marben','Fallout 4');
-INSERT INTO achats(jeu,adh)
+INSERT INTO achats(adh,jeu)
 VALUES('marben','Skyrim');
-INSERT INTO achats(jeu,adh)
+INSERT INTO achats(adh,jeu)
 VALUES('proant','Starcraft II');
-INSERT INTO commentaire(jeu,adh,description,dateCom)
+INSERT INTO commentaire(adh,jeu,description,dateCom)
 VALUES('marben','Skyrim','Meilleur jeu de tout les temps',TO_DATE('15-12-2016','DD-MM-YYYY'));
-INSERT INTO commentaire(jeu,adh,description,dateCom)
+INSERT INTO commentaire(adh,jeu,description,dateCom)
 VALUES('marben','Fallout 4','Comme Skyrim',TO_DATE('15-12-2016','DD-MM-YYYY'));
-INSERT INTO commentaire(jeu,adh,description,dateCom)
+INSERT INTO commentaire(adh,jeu,description,dateCom)
 VALUES('proant','Starcraft II','Choque decu',TO_DATE('15-12-2016','DD-MM-YYYY'));
