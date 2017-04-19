@@ -7,11 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.QueryParam;
 
 import dao.ConnexionBDD;
 
@@ -52,11 +52,12 @@ public class Servlet1 extends HttpServlet {
 				while (resultat.next()) {
 				    String jeu = resultat.getString("jeu");
 				    String adh = resultat.getString("adh");
-
+				    
+				    out.print("</p>");
 				    out.print(jeu);
 				    out.print("  ");
 				    out.print(adh);
-				    out.println("");
+				    out.print("</p>");
 				}
 				cnx.close();
 			}

@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="/Users/AntoineP/git/SR03-Repo/Projet_SR03/WebContent/WEB-INF/lib/jboss-servlet-api_3.1_spec-1.0.0.Final.jar"/>
 	<classpathentry kind="lib" path="/Users/AntoineP/git/SR03-Repo/Projet_SR03/WebContent/WEB-INF/lib/postgresql-42.0.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/postgresql-42.0.0.jar"/>
+	<classpathentry kind="lib" path="/Applications/wildfly-10.1.0.Final/modules/system/layers/base/javax/ws/rs/api/main/jboss-jaxrs-api_2.0_spec-1.0.0.Final.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

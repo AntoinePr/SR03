@@ -16,13 +16,13 @@ public final class ConnexionBDD {
 			p.load(Thread.currentThread().getContextClassLoader().
 						getResourceAsStream("confBDD.properties"));
 				
-			// chargement du driver
+			// Chargement du driver
 			Class.forName(p.getProperty("driver"));
 			System.out.println(p.getProperty("driver"));
 			cnx = DriverManager.getConnection(p.getProperty("url"),
 					p.getProperty("user"), p.getProperty("pwd"));
 			//Class.forName("org.postgresql.Driver");  
-			//cnx=DriverManager.getConnection("jdbc:postgresql://localhost:5555/jeux_video","",""); 			
+			//cnx = DriverManager.getConnection("jdbc:postgresql://localhost:5555/jeux_video","",""); 			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
