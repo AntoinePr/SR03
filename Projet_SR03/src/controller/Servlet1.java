@@ -43,21 +43,22 @@ public class Servlet1 extends HttpServlet {
 			out.print("<html><body>");
 			out.print("<h1>Page fonctionnelle</h1>");
 			if(cnx == null){
-				out.print("<h1>Connexion null</h1>");
+				out.print("<h2>Connexion null</h2>");
 			}
 			else{
 				Statement statement = cnx.createStatement();
-				ResultSet resultat = statement.executeQuery( "SELECT *  FROM achat;" );
-				out.print("<h1>Page de reponse de Servlet1</h1>");
-				while ( resultat.next() ) {
-				    String jeu = resultat.getString( "jeu" );
-				    String adh = resultat.getString( "adh" );
+				out.print("<h2>Test</h2>");
+				ResultSet resultat = statement.executeQuery( "SELECT * FROM achats;" );
+				while (resultat.next()) {
+				    String jeu = resultat.getString("jeu");
+				    String adh = resultat.getString("adh");
 
 				    out.print(jeu);
 				    out.print("  ");
 				    out.print(adh);
-				    out.print("\n");
+				    out.println("");
 				}
+				cnx.close();
 			}
 			out.print("</body></html>");
 			out.close();
