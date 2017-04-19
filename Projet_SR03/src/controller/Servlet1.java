@@ -1,4 +1,4 @@
-package controllers;
+package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,18 +40,24 @@ public class Servlet1 extends HttpServlet {
 		Connection cnx =  ConnexionBDD.getInstance().getCnx();
 		
 		try {
-			Statement statement = cnx.createStatement();
-			ResultSet resultat = statement.executeQuery( "SELECT *  FROM achat;" );
-			out.print("<html><body>");
-			out.print("<h1>Page de reponse de Servlet1</h1>");
-			while ( resultat.next() ) {
-			    String jeu = resultat.getString( "jeu" );
-			    String adh = resultat.getString( "adh" );
+			if(cnx == null){
+				out.print("<html><body>");
+				out.print("<h1>Connexion null</h1>");
+			}
+			else{
+				Statement statement = cnx.createStatement();
+				ResultSet resultat = statement.executeQuery( "SELECT *  FROM achat;" );
+				out.print("<html><body>");
+				out.print("<h1>Page de reponse de Servlet1</h1>");
+				while ( resultat.next() ) {
+				    String jeu = resultat.getString( "jeu" );
+				    String adh = resultat.getString( "adh" );
 
-			    out.print(jeu);
-			    out.print("  ");
-			    out.print(adh);
-			    out.print("\n");
+				    out.print(jeu);
+				    out.print("  ");
+				    out.print(adh);
+				    out.print("\n");
+				}
 			}
 			out.print("</body></html>");
 			out.close();

@@ -1,9 +1,7 @@
 package dao;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Properties;
 
 
@@ -17,12 +15,14 @@ public final class ConnexionBDD {
 			Properties p = new Properties();
 			p.load(Thread.currentThread().getContextClassLoader().
 						getResourceAsStream("confBDD.properties"));
+				
 			// chargement du driver
 			Class.forName(p.getProperty("driver"));
+			System.out.println(p.getProperty("driver"));
 			cnx = DriverManager.getConnection(p.getProperty("url"),
-					p.getProperty(""), p.getProperty(""));
-			Class.forName("com.postgresql.jdbc.Driver");  
-			cnx=DriverManager.getConnection("jdbc:postgresql://localhost:5555/jeux_video","root",""); 			
+					p.getProperty("user"), p.getProperty("pwd"));
+			//Class.forName("org.postgresql.Driver");  
+			//cnx=DriverManager.getConnection("jdbc:postgresql://localhost:5555/jeux_video","",""); 			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
