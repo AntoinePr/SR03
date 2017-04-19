@@ -40,14 +40,14 @@ public class Servlet1 extends HttpServlet {
 		Connection cnx =  ConnexionBDD.getInstance().getCnx();
 		
 		try {
+			out.print("<html><body>");
+			out.print("<h1>Page fonctionnelle</h1>");
 			if(cnx == null){
-				out.print("<html><body>");
 				out.print("<h1>Connexion null</h1>");
 			}
 			else{
 				Statement statement = cnx.createStatement();
 				ResultSet resultat = statement.executeQuery( "SELECT *  FROM achat;" );
-				out.print("<html><body>");
 				out.print("<h1>Page de reponse de Servlet1</h1>");
 				while ( resultat.next() ) {
 				    String jeu = resultat.getString( "jeu" );
