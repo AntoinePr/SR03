@@ -18,6 +18,6 @@ public class VideogameRESTService {
 	@Path("/test")
 	@Produces(MediaType.TEXT_PLAIN)
     public String getMessage() {
-        return "Hello ";
+        return "Hello " + getUser();
     }
 }
