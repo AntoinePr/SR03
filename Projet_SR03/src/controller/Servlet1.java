@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.crypto.*;
+import java.security.*;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +43,23 @@ public class Servlet1 extends HttpServlet {
 		try {
 			out.print("<html><body>");
 			out.print("<h1>Page fonctionnelle</h1>");
+			String data = "MotDePasse2";
+			MessageDigest messageDigest;
+			try {
+				messageDigest = MessageDigest.getInstance("SHA-256");
+				messageDigest.update(data.getBytes());
+				byte[] messageDigestSHA = messageDigest.digest();
+				StringBuffer stringBuffer = new StringBuffer();
+				for (byte bytes : messageDigestSHA) {
+					stringBuffer.append(String.format("%02x", bytes & 0xff));
+				}
+
+				out.println("data:" + data);
+				out.println("digestedSHA-256(hex):" + stringBuffer.toString());
+			} catch (NoSuchAlgorithmException exception) {
+				// TODO Auto-generated catch block
+				exception.printStackTrace();
+			}
 			if(cnx == null){
 				out.print("<h2>Connexion null</h2>");
 			}
@@ -64,6 +84,6 @@ public class Servlet1 extends HttpServlet {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();		
-		}		
+		}
 	}
 }
