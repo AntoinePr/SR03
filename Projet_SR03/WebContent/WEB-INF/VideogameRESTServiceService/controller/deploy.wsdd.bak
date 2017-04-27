@@ -1,0 +1,28 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from VideogameRESTServiceService WSDL service -->
+
+  <service name="VideogameRESTService" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://controller"/>
+      <parameter name="wsdlServiceElement" value="VideogameRESTServiceService"/>
+      <parameter name="schemaQualified" value="http://controller"/>
+      <parameter name="wsdlServicePort" value="VideogameRESTService"/>
+      <parameter name="className" value="controller.VideogameRESTServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="VideogameRESTService"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getMessage" qname="operNS:getMessage" xmlns:operNS="http://controller" returnQName="retNS:getMessageReturn" xmlns:retNS="http://controller" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+      </operation>
+      <parameter name="allowedMethods" value="getMessage"/>
+
+  </service>
+</deployment>
