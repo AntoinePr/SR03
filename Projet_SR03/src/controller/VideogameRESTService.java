@@ -1,9 +1,5 @@
 package controller;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.ws.rs.GET;
@@ -11,8 +7,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.Path;
-
-import dao.ConnexionBDD;
 
 import model.ProjectManager;
 import com.google.gson.Gson;
