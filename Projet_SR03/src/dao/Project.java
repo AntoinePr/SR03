@@ -37,8 +37,9 @@ public class Project {
 			query = "SELECT j.nom, j.prix, j.description, j.datesortie, e.raisonsociale"
 					+ " FROM jeux AS j, editeur AS e"
 					+ "	WHERE j.editeur = e.siret"
-					+ " AND j.nom = '" + jeu + "'";
+					+ " AND j.nom = ?";
 			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1, jeu);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
 				InfoJeuObject feedObject = new InfoJeuObject();
