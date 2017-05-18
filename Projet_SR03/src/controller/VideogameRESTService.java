@@ -17,6 +17,7 @@ import model.ProjectManager;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import dao.Secured;
 import dtio.CreerCompteInputObject;
 
 import dto.AchatsObject;
@@ -35,6 +36,7 @@ public class VideogameRESTService {
 	// Sert à tester le bon fonctionnement du serveur
 	@GET
 	@Path("/test")
+	@Secured
 	@Produces(MediaType.TEXT_PLAIN)
     public String getMessage() {
         return "Hello " + getUser();
@@ -53,7 +55,7 @@ public class VideogameRESTService {
 			feeds = gson.toJson(feedData);
 		} 
 		catch (Exception e) {
-			System.out.println("Exception Error");
+			System.out.println(e.getMessage());
 		}		
         return feeds;
 	}
