@@ -64,4 +64,36 @@ public class ProjectManager {
 		}
 		return feeds;
 	}
+	
+	public Boolean PostCreerCompte(
+			String login, 
+			String mdp,
+			String nom,
+			String prenom,
+			String datenaissance,
+			String rue,
+			Integer cp,
+			String ville,
+			String mail) throws Exception {
+		Boolean success = false;
+		try {
+			Connection connection =  ConnexionBDD.getInstance().getCnx();
+			Project project= new Project();
+			success = project.PostCreerCompte(
+					connection, 
+					login, 
+					mdp,
+					nom,
+					prenom,
+					datenaissance,
+					rue,
+					cp,
+					ville,
+					mail);
+		}
+		catch (Exception e){
+			throw e;
+		}
+		return success;
+	}
 }

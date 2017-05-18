@@ -105,4 +105,41 @@ public class Project {
 		}
 		return feedData;
 	}
+	
+	public Boolean PostCreerCompte(
+			Connection connection,
+			String login, 
+			String mdp,
+			String nom,
+			String prenom,
+			String datenaissance,
+			String rue,
+			Integer cp,
+			String ville,
+			String mail) 
+					throws Exception {
+		Boolean success = false;
+		try {
+			String query;
+			query = "INSERT INTO adherent "
+					+ "(login, mdp, nom, prenom, datenaissance, rue, cp, ville, mail) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1, login);
+			ps.setString(2, mdp);
+			ps.setString(3, nom);
+			ps.setString(4, prenom);
+			ps.setDate(5, java.sql.Date.valueOf(datenaissance));
+			ps.setString(6, rue);
+			ps.setInt(7, cp);
+			ps.setString(8, ville);
+			ps.setString(9, mail);
+			ps.executeUpdate();
+			success = true;
+		}
+		catch(Exception e) {
+			throw e;
+		}
+		return success;
+	}
 }

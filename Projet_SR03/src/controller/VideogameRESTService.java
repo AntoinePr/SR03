@@ -1,12 +1,12 @@
-// http://localhost:8080/Projet_SR03/rest/test
-// http://localhost:8080/Projet_SR03/rest/achats
-// http://localhost:8080/Projet_SR03/rest/info_jeu/Skyrim
+// http://localhost:8080/Projet_SR03/rest
 
 package controller;
 
 import java.util.ArrayList;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -15,6 +15,9 @@ import javax.ws.rs.PathParam;
 
 import model.ProjectManager;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import dtio.CreerCompteInputObject;
 
 import dto.AchatsObject;
 import dto.InfoJeuObject;
@@ -29,6 +32,7 @@ public class VideogameRESTService {
 		return Response.status(200).entity("getUser is called").build();
 	}
 
+	// Sert à tester le bon fonctionnement du serveur
 	@GET
 	@Path("/test")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -54,6 +58,7 @@ public class VideogameRESTService {
         return feeds;
 	}
 	
+	// Permet d'obtenir toutes les infos de la BDD sur un jeu en particulier
 	@GET
 	@Path("/info_jeu/{jeu}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -67,11 +72,12 @@ public class VideogameRESTService {
 			feeds = gson.toJson(feedData);
 		} 
 		catch (Exception e) {
-			System.out.println("Exception Error");
+			System.out.println(e.getMessage());
 		}		
         return feeds;
 	}
 	
+	// Permet de trouver tous les jeux qui match la chaine de caractère en entrée
 	@GET
 	@Path("/recherche_jeu/{jeu}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -85,11 +91,12 @@ public class VideogameRESTService {
 			feeds = gson.toJson(feedData);
 		} 
 		catch (Exception e) {
-			System.out.println("Exception Error");
+			System.out.println(e.getMessage());
 		}		
         return feeds;
 	}
 	
+	// Renvoie les 1 jeux les plus vendus
 	@GET
 	@Path("/top_ventes")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -103,8 +110,43 @@ public class VideogameRESTService {
 			feeds = gson.toJson(feedData);
 		} 
 		catch (Exception e) {
-			System.out.println("Exception Error");
+			System.out.println(e.getMessage());
 		}		
         return feeds;
+	}
+	
+	// Permet la création d'un nouveau compte
+	@POST
+	@Path("/creer_compte")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String postCreerCompte(String input){
+		String feeds = null;
+		try {
+			Gson gson = new Gson();
+			CreerCompteInputObject params = gson.fromJson(input, CreerCompteInputObject.class);
+			
+			ProjectManager projectManager= new ProjectManager();
+			Boolean success = false;
+			success = projectManager.PostCreerCompte(
+					params.getLogin(), 
+					params.getMdp(),
+					params.getNom(),
+					params.getPrenom(),
+					params.getDatenaissance(),
+					params.getRue(),
+					params.getCp(),
+					params.getVille(),
+					params.getMail()
+					);
+			
+			JsonObject result =new JsonObject();
+			result.addProperty("success", success);
+			feeds = result.toString();
+		} 
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return feeds;
 	}
 }
