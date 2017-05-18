@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import dto.AchatsObject;
 import dto.InfoJeuObject;
+import dto.TopVentesObject;
 
 public class Project {
 	
@@ -50,6 +51,30 @@ public class Project {
 				feedObject.setRaisonsociale(rs.getString("raisonsociale"));
 				feedData.add(feedObject);
 			}
+		}
+		catch(Exception e) {
+			throw e;
+		}
+		return feedData;
+	}
+	
+	public ArrayList<TopVentesObject> GetTopVentes(Connection connection) throws Exception {
+		ArrayList<TopVentesObject> feedData = new ArrayList<TopVentesObject>();
+		try {
+			String query;
+			query = "SELECT jeu, COUNT(*) AS nb_ventes "
+					+ "FROM achats GROUP BY jeu "
+					+ "ORDER BY nb_ventes DESC "
+					+ "LIMIT 1";
+			PreparedStatement ps = connection.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				TopVentesObject feedObject = new TopVentesObject();
+				feedObject.setJeu(rs.getString("jeu"));
+				feedObject.setNb_ventes(rs.getInt("nb_ventes"));
+				feedData.add(feedObject);
+			}
+
 		}
 		catch(Exception e) {
 			throw e;

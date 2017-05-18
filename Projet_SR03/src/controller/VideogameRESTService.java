@@ -1,3 +1,7 @@
+// http://localhost:8080/Projet_SR03/rest/test
+// http://localhost:8080/Projet_SR03/rest/achats
+// http://localhost:8080/Projet_SR03/rest/info_jeu/Skyrim
+
 package controller;
 
 import java.util.ArrayList;
@@ -14,6 +18,7 @@ import com.google.gson.Gson;
 
 import dto.AchatsObject;
 import dto.InfoJeuObject;
+import dto.TopVentesObject;
 
 @Path("/rest")
 public class VideogameRESTService {
@@ -57,6 +62,24 @@ public class VideogameRESTService {
 			ArrayList<InfoJeuObject> feedData = null;
 			ProjectManager projectManager= new ProjectManager();
 			feedData = projectManager.GetInfoJeu(jeu);
+			Gson gson = new Gson();
+			feeds = gson.toJson(feedData);
+		} 
+		catch (Exception e) {
+			System.out.println("Exception Error");
+		}		
+        return feeds;
+	}
+	
+	@GET
+	@Path("/top_ventes")
+	@Produces(MediaType.APPLICATION_JSON)
+    public String feedTopVentes() {
+		String feeds = null;
+		try {
+			ArrayList<TopVentesObject> feedData = null;
+			ProjectManager projectManager= new ProjectManager();
+			feedData = projectManager.GetTopVentes();
 			Gson gson = new Gson();
 			feeds = gson.toJson(feedData);
 		} 
