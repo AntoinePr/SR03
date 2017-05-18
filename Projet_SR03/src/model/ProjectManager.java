@@ -8,6 +8,7 @@ import dao.Project;
 
 import dto.AchatsObject;
 import dto.InfoJeuObject;
+import dto.RechercheJeuObject;
 import dto.TopVentesObject;
 
 public class ProjectManager {
@@ -31,6 +32,19 @@ public class ProjectManager {
 			Connection connection =  ConnexionBDD.getInstance().getCnx();
 			Project project= new Project();
 			feeds=project.GetInfoJeu(connection, jeu);
+		}
+		catch (Exception e){
+			throw e;
+		}
+		return feeds;
+	}
+	
+	public ArrayList<RechercheJeuObject> GetRechercheJeu(String jeu) throws Exception {
+		ArrayList<RechercheJeuObject> feeds = null;
+		try {
+			Connection connection =  ConnexionBDD.getInstance().getCnx();
+			Project project= new Project();
+			feeds=project.GetRechercheJeu(connection, jeu);
 		}
 		catch (Exception e){
 			throw e;

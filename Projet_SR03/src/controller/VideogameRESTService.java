@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 
 import dto.AchatsObject;
 import dto.InfoJeuObject;
+import dto.RechercheJeuObject;
 import dto.TopVentesObject;
 
 @Path("/rest")
@@ -62,6 +63,24 @@ public class VideogameRESTService {
 			ArrayList<InfoJeuObject> feedData = null;
 			ProjectManager projectManager= new ProjectManager();
 			feedData = projectManager.GetInfoJeu(jeu);
+			Gson gson = new Gson();
+			feeds = gson.toJson(feedData);
+		} 
+		catch (Exception e) {
+			System.out.println("Exception Error");
+		}		
+        return feeds;
+	}
+	
+	@GET
+	@Path("/recherche_jeu/{jeu}")
+	@Produces(MediaType.APPLICATION_JSON)
+    public String feedRechercheJeu(@PathParam("jeu") String jeu) {
+		String feeds = null;
+		try {
+			ArrayList<RechercheJeuObject> feedData = null;
+			ProjectManager projectManager= new ProjectManager();
+			feedData = projectManager.GetRechercheJeu(jeu);
 			Gson gson = new Gson();
 			feeds = gson.toJson(feedData);
 		} 

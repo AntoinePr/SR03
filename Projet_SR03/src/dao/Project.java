@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import dto.AchatsObject;
 import dto.InfoJeuObject;
+import dto.RechercheJeuObject;
 import dto.TopVentesObject;
 
 public class Project {
@@ -49,6 +50,29 @@ public class Project {
 				feedObject.setDescription(rs.getString("description"));
 				feedObject.setDatesortie(rs.getString("datesortie"));
 				feedObject.setRaisonsociale(rs.getString("raisonsociale"));
+				feedData.add(feedObject);
+			}
+		}
+		catch(Exception e) {
+			throw e;
+		}
+		return feedData;
+	}
+	
+	public ArrayList<RechercheJeuObject> GetRechercheJeu(Connection connection, String jeu) throws Exception {
+		ArrayList<RechercheJeuObject> feedData = new ArrayList<RechercheJeuObject>();
+		try {
+			String query;
+			query = "SELECT nom, description "
+					+ "FROM jeux "
+					+ "WHERE nom LIKE ?";
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1, '%'+jeu+'%');
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()){
+				RechercheJeuObject feedObject = new RechercheJeuObject();
+				feedObject.setNom(rs.getString("nom"));
+				feedObject.setDescription(rs.getString("description"));
 				feedData.add(feedObject);
 			}
 		}
