@@ -1,4 +1,4 @@
-package dao;
+package controller;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -14,6 +14,9 @@ import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.ext.Provider;
 
+import dao.ConnexionBDD;
+import dao.Secured;
+
 @Secured
 @Provider
 @Priority(Priorities.AUTHENTICATION)
@@ -23,13 +26,15 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     public void filter(ContainerRequestContext requestContext) throws IOException {
 		
 		System.out.println("validateToken called");
-		
+		 
 		// Get the HTTP Authorization header from the request
         String authorizationHeader = 
             requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
         
+        System.out.println(authorizationHeader);
+        
         // Check if the HTTP Authorization header is present and formatted correctly 
-        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+        if (authorizationHeader == null || !authorizationHeader.startsWith("Token ")) {
             throw new NotAuthorizedException("Authorization header must be provided");
         }
         
@@ -40,6 +45,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
             // Validate the token
             validateToken(token);
         } catch (Exception e) {
+        	System.out.println(e.getMessage());
             requestContext.abortWith(
                 Response.status(Response.Status.UNAUTHORIZED).build());
         }
