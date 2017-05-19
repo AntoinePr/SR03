@@ -7,8 +7,11 @@ import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.Path;
@@ -39,24 +42,32 @@ public class VideogameRESTService {
 	// Sert à tester le bon fonctionnement du serveur
 	@GET
 	@Path("/test")
-	@Secured
 	@Produces(MediaType.TEXT_PLAIN)
     public String getMessage() {
         return "Hello " + getUser();
     }
 	
 	@GET
+	@Secured
 	@Path("/achats")
 	@Produces(MediaType.APPLICATION_JSON)
-    public String feedAchats() {
+    public String feedAchats(ContainerRequestContext requestContext) {
 		String feeds = null;
 		try {
+			// Extract token from header
+	        String authorizationHeader = 
+	            requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
+	        if (authorizationHeader == null || !authorizationHeader.startsWith("Token ")) {
+	        	throw new NotAuthorizedException("Authorization header must be provided");
+	        }
+	        String token = authorizationHeader.substring("Token".length()).trim();
+	        
 			ArrayList<AchatsObject> feedData = null;
 			ProjectManager projectManager= new ProjectManager();
-			feedData = projectManager.GetAchats();
+			feedData = projectManager.GetAchats(token);
 			Gson gson = new Gson();
 			feeds = gson.toJson(feedData);
-		} 
+		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 		}		
@@ -120,6 +131,39 @@ public class VideogameRESTService {
         return feeds;
 	}
 	
+	// Permet la connexion d'un utilisateur, génération d'un token
+	@POST
+	@Path("/connexion")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public String postConnexion(String input){
+		String feeds = null;
+		try {
+			Gson gson = new Gson();
+			ConnexionInputObject params = gson.fromJson(input, ConnexionInputObject.class);
+			
+			ProjectManager projectManager= new ProjectManager();
+			String token = "";
+			token = projectManager.PostConnexion(
+					params.getLogin(), 
+					params.getMdp()
+					);
+			if (token == "") {
+				// If the token is empty we raise an exception
+				IOException e = new IOException();
+				throw e;
+			}
+			
+			JsonObject result =new JsonObject();
+			result.addProperty("token", token);
+			feeds = result.toString();
+		} 
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return feeds;
+	}
+	
 	// Permet la création d'un nouveau compte
 	@POST
 	@Path("/creer_compte")
@@ -154,37 +198,4 @@ public class VideogameRESTService {
 		}
 		return feeds;
 	}
-	
-	// Permet la connexion d'un utilisateur, génération d'un token
-		@POST
-		@Path("/connexion")
-		@Consumes(MediaType.APPLICATION_JSON)
-		@Produces(MediaType.APPLICATION_JSON)
-		public String postConnexion(String input){
-			String feeds = null;
-			try {
-				Gson gson = new Gson();
-				ConnexionInputObject params = gson.fromJson(input, ConnexionInputObject.class);
-				
-				ProjectManager projectManager= new ProjectManager();
-				String token = "";
-				token = projectManager.PostConnexion(
-						params.getLogin(), 
-						params.getMdp()
-						);
-				if (token == "") {
-					// If the token is empty we raise an exception
-					IOException e = new IOException();
-					throw e;
-				}
-				
-				JsonObject result =new JsonObject();
-				result.addProperty("token", token);
-				feeds = result.toString();
-			} 
-			catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-			return feeds;
-		}
 }

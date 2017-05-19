@@ -13,12 +13,13 @@ import dto.TopVentesObject;
 
 public class ProjectManager {
 	
-	public ArrayList<AchatsObject> GetAchats() throws Exception {
+	public ArrayList<AchatsObject> GetAchats(String token) throws Exception {
 		ArrayList<AchatsObject> feeds = null;
 		try {
 			Connection connection =  ConnexionBDD.getInstance().getCnx();
 			Project project= new Project();
-			feeds=project.GetAchats(connection);
+			String login = project.GetLoginFromToken(connection, token);
+			feeds=project.GetAchats(connection, login);
 		}
 		catch (Exception e){
 			throw e;
@@ -65,6 +66,22 @@ public class ProjectManager {
 		return feeds;
 	}
 	
+	public String PostConnexion(
+			String login, 
+			String mdp) throws Exception {
+		String token = "";
+		try {
+			Connection connection =  ConnexionBDD.getInstance().getCnx();
+			Project project= new Project();
+			project.CheckUserInfo(connection, login, mdp);
+			token = project.GenerateToken(connection, login, mdp);
+		}
+		catch (Exception e){
+			throw e;
+		}
+		return token;
+	}
+	
 	public Boolean PostCreerCompte(
 			String login, 
 			String mdp,
@@ -95,21 +112,5 @@ public class ProjectManager {
 			throw e;
 		}
 		return success;
-	}
-	
-	public String PostConnexion(
-			String login, 
-			String mdp) throws Exception {
-		String token = "";
-		try {
-			Connection connection =  ConnexionBDD.getInstance().getCnx();
-			Project project= new Project();
-			project.CheckUserInfo(connection, login, mdp);
-			token = project.GenerateToken(connection, login, mdp);
-		}
-		catch (Exception e){
-			throw e;
-		}
-		return token;
 	}
 }

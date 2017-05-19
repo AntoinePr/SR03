@@ -16,12 +16,18 @@ import dto.TopVentesObject;
 
 public class Project {
 	
-	public ArrayList<AchatsObject> GetAchats(Connection connection) throws Exception {
+	public ArrayList<AchatsObject> GetAchats(
+			Connection connection, 
+			String login) 
+					throws Exception {
 		ArrayList<AchatsObject> feedData = new ArrayList<AchatsObject>();
 		try {
 			String query;
-			query = "SELECT adh, jeu FROM achats";
+			query = "SELECT adh, jeu "
+					+ "FROM achats "
+					+ "WHERE adh = ?";
 			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1, login);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
 				AchatsObject feedObject = new AchatsObject();
@@ -202,5 +208,29 @@ public class Project {
 			throw e;
 		}
 		return token;
+	}
+	
+	public String GetLoginFromToken(
+			Connection connection,
+			String token) 
+					throws Exception {
+		String login = "";
+		try {
+			
+			// Update the database with the new token
+			String query;
+			query = "SELECT login "
+					+ "FROM adherent "
+					+ "WHERE token = ? ";
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1, token);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			login = rs.getString("login");
+		}
+		catch(Exception e) {
+			throw e;
+		}
+		return login;
 	}
 }

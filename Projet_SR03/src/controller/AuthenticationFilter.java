@@ -24,14 +24,10 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
 	@Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
-		
-		System.out.println("validateToken called");
 		 
 		// Get the HTTP Authorization header from the request
         String authorizationHeader = 
             requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
-        
-        System.out.println(authorizationHeader);
         
         // Check if the HTTP Authorization header is present and formatted correctly 
         if (authorizationHeader == null || !authorizationHeader.startsWith("Token ")) {
