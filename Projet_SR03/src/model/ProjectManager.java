@@ -6,15 +6,14 @@ import java.util.ArrayList;
 import dao.ConnexionBDD;
 import dao.Project;
 
-import dto.AchatsObject;
 import dto.InfoJeuObject;
 import dto.RechercheJeuObject;
 import dto.TopVentesObject;
 
 public class ProjectManager {
 	
-	public ArrayList<AchatsObject> GetAchats(String token) throws Exception {
-		ArrayList<AchatsObject> feeds = null;
+	public ArrayList<InfoJeuObject> GetAchats(String token) throws Exception {
+		ArrayList<InfoJeuObject> feeds = null;
 		try {
 			Connection connection =  ConnexionBDD.getInstance().getCnx();
 			Project project= new Project();

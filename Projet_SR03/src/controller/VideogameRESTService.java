@@ -26,7 +26,6 @@ import dao.Secured;
 import dtio.CreerCompteInputObject;
 import dtio.ConnexionInputObject;
 
-import dto.AchatsObject;
 import dto.InfoJeuObject;
 import dto.RechercheJeuObject;
 import dto.TopVentesObject;
@@ -62,7 +61,7 @@ public class VideogameRESTService {
 	        }
 	        String token = authorizationHeader.substring("Token".length()).trim();
 	        
-			ArrayList<AchatsObject> feedData = null;
+			ArrayList<InfoJeuObject> feedData = null;
 			ProjectManager projectManager= new ProjectManager();
 			feedData = projectManager.GetAchats(token);
 			Gson gson = new Gson();

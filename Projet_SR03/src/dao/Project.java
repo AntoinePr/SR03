@@ -9,30 +9,34 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Random;
 
-import dto.AchatsObject;
 import dto.InfoJeuObject;
 import dto.RechercheJeuObject;
 import dto.TopVentesObject;
 
 public class Project {
 	
-	public ArrayList<AchatsObject> GetAchats(
+	public ArrayList<InfoJeuObject> GetAchats(
 			Connection connection, 
 			String login) 
 					throws Exception {
-		ArrayList<AchatsObject> feedData = new ArrayList<AchatsObject>();
+		ArrayList<InfoJeuObject> feedData = new ArrayList<InfoJeuObject>();
 		try {
 			String query;
-			query = "SELECT adh, jeu "
-					+ "FROM achats "
-					+ "WHERE adh = ?";
+			query = "SELECT j.nom, j.prix, j.description, j.datesortie, e.raisonsociale "
+					+ "FROM achats AS a, jeux AS j, editeur AS e "
+					+ "WHERE a.adh = ? "
+					+ "AND a.jeu = j.nom "
+					+ "AND j.editeur = e.siret";
 			PreparedStatement ps = connection.prepareStatement(query);
 			ps.setString(1, login);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
-				AchatsObject feedObject = new AchatsObject();
-				feedObject.setAdh(rs.getString("adh"));
-				feedObject.setJeu(rs.getString("jeu"));
+				InfoJeuObject feedObject = new InfoJeuObject();
+				feedObject.setNom(rs.getString("nom"));
+				feedObject.setPrix(rs.getString("prix"));
+				feedObject.setDescription(rs.getString("description"));
+				feedObject.setDatesortie(rs.getString("datesortie"));
+				feedObject.setRaisonsociale(rs.getString("raisonsociale"));
 				feedData.add(feedObject);
 			}
 		}
