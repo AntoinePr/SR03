@@ -1,9 +1,13 @@
 package dao;
 
+import java.io.IOException;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Random;
 
 import dto.AchatsObject;
 import dto.InfoJeuObject;
@@ -141,5 +145,62 @@ public class Project {
 			throw e;
 		}
 		return success;
+	}
+	
+	public void CheckUserInfo(
+			Connection connection,
+			String login, 
+			String mdp) 
+					throws Exception {
+		try {
+			String query;
+			query = "SELECT * "
+					+ "FROM adherent "
+					+ "WHERE login = ? "
+					+ "AND mdp = ?";
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1, login);
+			ps.setString(2, mdp);
+			ps.executeQuery();
+			ResultSet rs = ps.executeQuery();
+			if (!rs.next()) {
+				// No such user found, we raise an exception
+				IOException e = new IOException();
+				throw e;
+			}
+		}
+		catch(Exception e) {
+			throw e;
+		}
+		return;
+	}
+	
+	public String GenerateToken(
+			Connection connection,
+			String login, 
+			String mdp) 
+					throws Exception {
+		String token = "";
+		try {
+			// Generation of the secure token
+			Random random = new SecureRandom();
+			token = new BigInteger(130, random).toString(32);
+			
+			// Update the database with the new token
+			String query;
+			query = "UPDATE adherent "
+					+ "SET token = ? "
+					+ "WHERE login = ? "
+					+ "AND mdp = ?";
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1, token);
+			ps.setString(2, login);
+			ps.setString(3, mdp);
+			ps.executeUpdate();
+		}
+		catch(Exception e) {
+			throw e;
+		}
+		return token;
 	}
 }

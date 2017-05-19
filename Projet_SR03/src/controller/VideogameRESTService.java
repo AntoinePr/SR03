@@ -2,6 +2,7 @@
 
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.ws.rs.Consumes;
@@ -20,6 +21,7 @@ import com.google.gson.JsonObject;
 import dao.Secured;
 
 import dtio.CreerCompteInputObject;
+import dtio.ConnexionInputObject;
 
 import dto.AchatsObject;
 import dto.InfoJeuObject;
@@ -152,4 +154,37 @@ public class VideogameRESTService {
 		}
 		return feeds;
 	}
+	
+	// Permet la connexion d'un utilisateur, génération d'un token
+		@POST
+		@Path("/connexion")
+		@Consumes(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.APPLICATION_JSON)
+		public String postConnexion(String input){
+			String feeds = null;
+			try {
+				Gson gson = new Gson();
+				ConnexionInputObject params = gson.fromJson(input, ConnexionInputObject.class);
+				
+				ProjectManager projectManager= new ProjectManager();
+				String token = "";
+				token = projectManager.PostConnexion(
+						params.getLogin(), 
+						params.getMdp()
+						);
+				if (token == "") {
+					// If the token is empty we raise an exception
+					IOException e = new IOException();
+					throw e;
+				}
+				
+				JsonObject result =new JsonObject();
+				result.addProperty("token", token);
+				feeds = result.toString();
+			} 
+			catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			return feeds;
+		}
 }

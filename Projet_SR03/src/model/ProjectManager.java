@@ -96,4 +96,20 @@ public class ProjectManager {
 		}
 		return success;
 	}
+	
+	public String PostConnexion(
+			String login, 
+			String mdp) throws Exception {
+		String token = "";
+		try {
+			Connection connection =  ConnexionBDD.getInstance().getCnx();
+			Project project= new Project();
+			project.CheckUserInfo(connection, login, mdp);
+			token = project.GenerateToken(connection, login, mdp);
+		}
+		catch (Exception e){
+			throw e;
+		}
+		return token;
+	}
 }
