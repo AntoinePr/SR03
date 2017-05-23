@@ -1,0 +1,6 @@
+package dto;
+
+public class CreerCompteInputObject {
+	private String login;
+	private String mdp;
+}
