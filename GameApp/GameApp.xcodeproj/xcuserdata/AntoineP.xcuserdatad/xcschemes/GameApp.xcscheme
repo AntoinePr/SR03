@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "091086B11ED45C8000DBB4C1"
+               BlueprintIdentifier = "091086D31ED4856F00DBB4C1"
                BuildableName = "GameApp.app"
                BlueprintName = "GameApp"
                ReferencedContainer = "container:GameApp.xcodeproj">
@@ -32,7 +32,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "091086B11ED45C8000DBB4C1"
+            BlueprintIdentifier = "091086D31ED4856F00DBB4C1"
             BuildableName = "GameApp.app"
             BlueprintName = "GameApp"
             ReferencedContainer = "container:GameApp.xcodeproj">
@@ -55,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "091086B11ED45C8000DBB4C1"
+            BlueprintIdentifier = "091086D31ED4856F00DBB4C1"
             BuildableName = "GameApp.app"
             BlueprintName = "GameApp"
             ReferencedContainer = "container:GameApp.xcodeproj">
@@ -74,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "091086B11ED45C8000DBB4C1"
+            BlueprintIdentifier = "091086D31ED4856F00DBB4C1"
             BuildableName = "GameApp.app"
             BlueprintName = "GameApp"
             ReferencedContainer = "container:GameApp.xcodeproj">
