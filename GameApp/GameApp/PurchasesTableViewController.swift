@@ -91,8 +91,6 @@ class PurchasesTableViewController: UITableViewController {
     
     func loadPurchases() {
         self.getPurchases() { (json) -> () in
-            print(json)
-            print("\n----------------------------\n")
             for i in 0...(json.count-1) {
                 print(json.count)
                 self.purchases.append(Purchase(
@@ -107,7 +105,9 @@ class PurchasesTableViewController: UITableViewController {
     
     func getPurchases(completion: @escaping (_ json: JSON)->Void)
     {
-        let headers: HTTPHeaders = ["AUTHORIZATION": "Token 7qj6nnih59mabub1qaloogcov0"]
+        var token = "Token "
+        token += UserDefaults.standard.value(forKey: "token") as! String
+        let headers: HTTPHeaders = ["AUTHORIZATION": token]
         
         Alamofire.request("http://localhost:8080/Projet_SR03/rest/achats",
                           headers: headers)

@@ -5992,3 +5992,9 @@ Caused by: java.net.ConnectException: Connection refused
 
 !ENTRY org.jboss.ide.eclipse.as.core 4 0 2017-06-08 17:31:52.315
 !MESSAGE Unable to retrieve a list of remote deployment scanners
+
+!ENTRY org.jboss.ide.eclipse.as.core 4 0 2017-06-09 16:17:46.527
+!MESSAGE Unable to retrieve a list of remote deployment scanners
+
+!ENTRY org.jboss.ide.eclipse.as.core 4 0 2017-06-09 16:17:46.528
+!MESSAGE Unable to retrieve a list of remote deployment scanners
