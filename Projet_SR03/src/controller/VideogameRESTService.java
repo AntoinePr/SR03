@@ -50,7 +50,7 @@ public class VideogameRESTService {
 	@Secured
 	@Path("/achats")
 	@Produces(MediaType.APPLICATION_JSON)
-    public String feedAchats(ContainerRequestContext requestContext) {
+    public Response feedAchats(ContainerRequestContext requestContext) {
 		String feeds = null;
 		try {
 			// Extract token from header
@@ -69,15 +69,16 @@ public class VideogameRESTService {
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
+			return Response.status(401).build();
 		}		
-        return feeds;
+		return Response.ok(feeds, MediaType.APPLICATION_JSON).build();
 	}
 	
 	// Permet d'obtenir toutes les infos de la BDD sur un jeu en particulier
 	@GET
 	@Path("/info_jeu/{jeu}")
 	@Produces(MediaType.APPLICATION_JSON)
-    public String feedInfoJeu(@PathParam("jeu") String jeu) {
+    public Response feedInfoJeu(@PathParam("jeu") String jeu) {
 		String feeds = null;
 		try {
 			ArrayList<InfoJeuObject> feedData = null;
@@ -88,15 +89,16 @@ public class VideogameRESTService {
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
+			return Response.status(500).build();
 		}		
-        return feeds;
+		return Response.ok(feeds, MediaType.APPLICATION_JSON).build();
 	}
 	
 	// Permet de trouver tous les jeux qui match la chaine de caractère en entrée
 	@GET
 	@Path("/recherche_jeu/{jeu}")
 	@Produces(MediaType.APPLICATION_JSON)
-    public String feedRechercheJeu(@PathParam("jeu") String jeu) {
+    public Response feedRechercheJeu(@PathParam("jeu") String jeu) {
 		String feeds = null;
 		try {
 			ArrayList<RechercheJeuObject> feedData = null;
@@ -107,15 +109,16 @@ public class VideogameRESTService {
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
+			return Response.status(500).build();
 		}		
-        return feeds;
+		return Response.ok(feeds, MediaType.APPLICATION_JSON).build();
 	}
 	
 	// Renvoie les 1 jeux les plus vendus
 	@GET
 	@Path("/top_ventes")
 	@Produces(MediaType.APPLICATION_JSON)
-    public String feedTopVentes() {
+    public Response feedTopVentes() {
 		String feeds = null;
 		try {
 			ArrayList<TopVentesObject> feedData = null;
@@ -126,8 +129,9 @@ public class VideogameRESTService {
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
+			return Response.status(500).build();
 		}		
-        return feeds;
+		return Response.ok(feeds, MediaType.APPLICATION_JSON).build();
 	}
 	
 	// Permet la connexion d'un utilisateur, génération d'un token
@@ -135,7 +139,7 @@ public class VideogameRESTService {
 	@Path("/connexion")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String postConnexion(String input){
+	public Response postConnexion(String input){
 		String feeds = null;
 		try {
 			Gson gson = new Gson();
@@ -159,8 +163,9 @@ public class VideogameRESTService {
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
+			return Response.status(401).build();
 		}
-		return feeds;
+		return Response.ok(feeds, MediaType.APPLICATION_JSON).build();
 	}
 	
 	// Permet la création d'un nouveau compte
@@ -168,7 +173,7 @@ public class VideogameRESTService {
 	@Path("/creer_compte")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String postCreerCompte(String input){
+	public Response postCreerCompte(String input){
 		String feeds = null;
 		try {
 			Gson gson = new Gson();
@@ -194,7 +199,8 @@ public class VideogameRESTService {
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
+			return Response.status(500).build();
 		}
-		return feeds;
+		return Response.ok(feeds, MediaType.APPLICATION_JSON).build();
 	}
 }
