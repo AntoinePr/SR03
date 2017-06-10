@@ -92,12 +92,10 @@ class PurchasesTableViewController: UITableViewController {
     func loadPurchases() {
         self.getPurchases() { (json) -> () in
             for i in 0...(json.count-1) {
-                print(json.count)
                 self.purchases.append(Purchase(
                     title: json[i]["nom"].string!,
                     description: json[i]["description"].string!
                 ))
-                print(json[i]["nom"].string!)
             }
             self.tableView.reloadData()
         }

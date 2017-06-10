@@ -16,7 +16,6 @@ class ConnexionViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,60 +25,36 @@ class ConnexionViewController: UIViewController {
 
     @IBAction func connexionButtonTapped(_ sender: Any) {
         
-        let login = loginTextField.text
-        let password = passwordTextField.text
+        let userLogin = loginTextField.text
+        let userPassword = passwordTextField.text
         
         // Check for empty field
-        if ((login?.isEmpty)! || (password?.isEmpty)!) {
+        if ((userLogin?.isEmpty)! || (userPassword?.isEmpty)!) {
             
             // Display alert message
             displayMyAlertMsg(msg: "Certains des champs sont vides")
             return
         }
         
-        let parameters: Parameters = [
-            "login": login ?? "",
-            "mdp": password ?? ""
-        ]
-        
-        Alamofire.request(
-            "http://localhost:8080/Projet_SR03/rest/connexion",
-            method: .post,
-            parameters: parameters,
-            encoding: JSONEncoding.default)
-            .responseJSON { response in
-                
-                let statusCode = response.response?.statusCode
-                if (response.error as? AFError) != nil {
-                    switch statusCode! {
-                    case 401:
-                        self.displayMyAlertMsg(msg: "Identifiant ou mot de passe invalides")
-                        return
-                    case 400..<500:
-                        self.displayMyAlertMsg(msg: "Erreur d'URL")
-                        return
-                    case 500..<600:
-                        self.displayMyAlertMsg(msg: "Serveur mommentanément indisponible")
-                        return
-                    default:
-                        self.displayMyAlertMsg(msg: "Service mommentanément indisponible")
-                        return
-                    }
-                } else if (response.error as? URLError) != nil {
-                    self.displayMyAlertMsg(msg: "Service mommentanément indisponible")
-                    return
+        makeConnexion(login: userLogin!, password: userPassword!, completion: {
+            (isUserConnected, message) in
+            UserDefaults.standard.set(isUserConnected, forKey: "isUserConnected")
+            DispatchQueue.main.async {
+                if isUserConnected {
+                    // The connection is a success, we enter the app
                     
-                } else if response.error == nil {
-                    self.displayMyAlertMsg(msg: "Connexion réussie")
-                    let json = JSON(response.result.value!)
-                    print("=====================")
-                    print(json)
-                    let token = json["token"].string!
-                    UserDefaults.standard.set(token, forKey: "token")
-                    print("=====================")
-                    print("TOKEN:", token)
+                    print("============================")
+                    print(self.definesPresentationContext)
+                    print("============================")
+                    self.definesPresentationContext = true
+                    self.performSegue(withIdentifier: "appEntryPoint", sender: self)
+
+                }else {
+                    // In case the connection fails, we display the type of error
+                    self.displayMyAlertMsg(msg: message)
                 }
-        }
+            }
+        })
     }
     
     func displayMyAlertMsg(msg: String) {
@@ -96,6 +71,52 @@ class ConnexionViewController: UIViewController {
         myAlert.addAction(okAction)
         self.present(myAlert, animated: true, completion: nil)
     }
+    
+    func makeConnexion(login: String, password: String,
+                       completion: @escaping (_ isUserConnected: Bool, _ message: String) -> ())
+    {
+        let parameters: Parameters = [
+            "login": login ,
+            "mdp": password 
+        ]
+        
+        Alamofire.request(
+            "http://localhost:8080/Projet_SR03/rest/connexion",
+            method: .post,
+            parameters: parameters,
+            encoding: JSONEncoding.default)
+            .responseJSON { response in
+                
+                let statusCode = (response.response?.statusCode)!
+                var returnMsg = "Success"
+                if (response.error as? AFError) != nil {
+                    switch statusCode {
+                    case 401:
+                        returnMsg = "Identifiant ou mot de passe invalides"
+                        completion(false, returnMsg)
+                    case 400..<500:
+                        returnMsg = "Erreur d'URL"
+                        completion(false, returnMsg)
+                    default:
+                        returnMsg = "Service mommentanément indisponible"
+                        completion(false, returnMsg)
+                    }
+                } else if (response.error as? URLError) != nil {
+                    returnMsg = "Service mommentanément indisponible"
+                    completion(false, returnMsg)
+                    
+                } else if response.error == nil {
+                    self.displayMyAlertMsg(msg: "Connexion réussie")
+                    let json = JSON(response.result.value!)
+                    let token = json["token"].string!
+                    UserDefaults.standard.set(token, forKey: "token")
+                    completion(true, returnMsg)
+                }
+        }
+        
+        return
+    }
+
 
 }
 

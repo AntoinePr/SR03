@@ -299,3 +299,10 @@
 
 !ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2017-06-09 16:17:38.699
 !MESSAGE Server Startup Succeeded
+!SESSION 
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2017-06-10 14:44:00.003
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2017-06-10 14:44:04.064
+!MESSAGE Server Startup Succeeded
