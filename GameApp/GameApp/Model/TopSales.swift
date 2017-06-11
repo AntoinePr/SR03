@@ -1,5 +1,5 @@
 //
-//  Purshases.swift
+//  TopSales.swift
 //  GameApp
 //
 //  Created by Antoine P on 28/05/2017.
@@ -10,13 +10,13 @@ import UIKit
 
 // Represente un achat générique d'un client
 
-class Purchase {
+class TopSales {
     
-    var title: String
-    var description: String
+    var jeu: String
+    var nb_ventes: Int
     
-    init(title: String, description: String) {
-        self.title = title
-        self.description = description
+    init(jeu: String, nb_ventes: Int) {
+        self.jeu = jeu
+        self.nb_ventes = nb_ventes
     }
 }
