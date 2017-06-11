@@ -14,8 +14,20 @@ class ConnexionViewController: UIViewController {
 
     @IBOutlet weak var loginTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("============================")
+        print(UserDefaults.standard.bool(forKey: "isUserConnected"))
+        print("============================")
+        let connected = UserDefaults.standard.value(forKey: "isUserConnected") as! Bool
+        if connected {
+            print("============================")
+            print("Trying to change view")
+            print(connected)
+            print("============================")
+            self.performSegue(withIdentifier: "appEntryPoint", sender: self)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,11 +55,11 @@ class ConnexionViewController: UIViewController {
                 if isUserConnected {
                     // The connection is a success, we enter the app
                     
-                    print("============================")
-                    print(self.definesPresentationContext)
-                    print("============================")
-                    self.definesPresentationContext = true
-                    self.performSegue(withIdentifier: "appEntryPoint", sender: self)
+                    //self.definesPresentationContext = true
+                    //self.performSegue(withIdentifier: "appEntryPoint", sender: self)
+                    
+                    //let vc : AnyObject! = self.storyboard!.instantiateViewController(withIdentifier: "MainToolBar")
+                    //self.present(vc as! UITabBarController, animated: true, completion: nil)
 
                 }else {
                     // In case the connection fails, we display the type of error
