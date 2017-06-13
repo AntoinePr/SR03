@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import dto.InfoJeuObject;
@@ -236,5 +237,33 @@ public class Project {
 			throw e;
 		}
 		return login;
+	}
+	
+	public String[] AcheterPanier(
+			Connection connection,
+			String login,
+			String[] jeux) 
+					throws Exception {
+		List<String> ajouts = new ArrayList<String>();
+		String jeu;
+		for (int i = 0; i < jeux.length; i++) {
+			try {
+				jeu =  jeux[i];
+				String query;
+				query = "INSERT INTO achats "
+						+ "(jeu, adh) "
+						+ "VALUES (?, ?)";
+				PreparedStatement ps = connection.prepareStatement(query);
+				ps.setString(1, jeu);
+				ps.setString(2, login);
+				ps.executeUpdate();
+				ajouts.add(jeu);
+			}
+			catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		String[] simpleArray = new String[ ajouts.size() ];
+		return ajouts.toArray( simpleArray );
 	}
 }

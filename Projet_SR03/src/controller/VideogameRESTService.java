@@ -11,6 +11,7 @@ import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -24,6 +25,7 @@ import com.google.gson.JsonObject;
 import dao.Secured;
 
 import dtio.CreerCompteInputObject;
+import dtio.AcheterPanierInputObject;
 import dtio.ConnexionInputObject;
 
 import dto.InfoJeuObject;
@@ -43,6 +45,7 @@ public class VideogameRESTService {
 	@Path("/test")
 	@Produces(MediaType.TEXT_PLAIN)
     public String getMessage() {
+		System.out.println("Endpoint 'test' called");
         return "Hello " + getUser();
     }
 	
@@ -51,6 +54,7 @@ public class VideogameRESTService {
 	@Path("/achats")
 	@Produces(MediaType.APPLICATION_JSON)
     public Response feedAchats(ContainerRequestContext requestContext) {
+		System.out.println("Endpoint 'achats' called");
 		String feeds = null;
 		try {
 			// Extract token from header
@@ -79,6 +83,7 @@ public class VideogameRESTService {
 	@Path("/info_jeu/{jeu}")
 	@Produces(MediaType.APPLICATION_JSON)
     public Response feedInfoJeu(@PathParam("jeu") String jeu) {
+		System.out.println("Endpoint 'info_jeu/{jeu}' called");
 		String feeds = null;
 		try {
 			ArrayList<InfoJeuObject> feedData = null;
@@ -99,6 +104,7 @@ public class VideogameRESTService {
 	@Path("/recherche_jeu/{jeu}")
 	@Produces(MediaType.APPLICATION_JSON)
     public Response feedRechercheJeu(@PathParam("jeu") String jeu) {
+		System.out.println("Endpoint 'recherche_jeu/{jeu}' called");
 		String feeds = null;
 		try {
 			ArrayList<RechercheJeuObject> feedData = null;
@@ -119,6 +125,7 @@ public class VideogameRESTService {
 	@Path("/top_ventes")
 	@Produces(MediaType.APPLICATION_JSON)
     public Response feedTopVentes() {
+		System.out.println("Endpoint 'top_ventes' called");
 		String feeds = null;
 		try {
 			ArrayList<TopVentesObject> feedData = null;
@@ -134,12 +141,48 @@ public class VideogameRESTService {
 		return Response.ok(feeds, MediaType.APPLICATION_JSON).build();
 	}
 	
+	// Permet d'acheter un panier d'article
+	@POST
+	@Secured
+	@Path("/acheter_panier")
+	@Produces(MediaType.APPLICATION_JSON)
+    public Response feedAcheterPanier(String input, @Context ContainerRequestContext requestContext) {
+		System.out.println("Endpoint 'acheter_panier' called");
+		String feeds = null;
+		try {
+			// Extract token from header
+	        String authorizationHeader = 
+	            requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
+	        if (authorizationHeader == null || !authorizationHeader.startsWith("Token ")) {
+	        	throw new NotAuthorizedException("Authorization header must be provided");
+	        }
+	        String token = authorizationHeader.substring("Token".length()).trim();
+	        
+	        // Parse the input json
+	        Gson gson = new Gson();
+	        AcheterPanierInputObject params = gson.fromJson(input, AcheterPanierInputObject.class);
+	        
+			ProjectManager projectManager= new ProjectManager();
+			String[] ajouts;
+			ajouts = projectManager.PostAcheterPanier(
+					token, 
+					params.getJeux());
+			feeds = gson.toJson(ajouts);
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
+			return Response.status(401).build();
+		}		
+		return Response.ok(feeds, MediaType.APPLICATION_JSON).build();
+	}
+	
 	// Permet la connexion d'un utilisateur, génération d'un token
 	@POST
 	@Path("/connexion")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response postConnexion(String input){
+		System.out.println("Endpoint 'connexion' called");
 		String feeds = null;
 		try {
 			Gson gson = new Gson();
@@ -160,6 +203,7 @@ public class VideogameRESTService {
 			JsonObject result =new JsonObject();
 			result.addProperty("token", token);
 			feeds = result.toString();
+			//feeds = result.toString();
 		} 
 		catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -174,6 +218,7 @@ public class VideogameRESTService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response postCreerCompte(String input){
+		System.out.println("Endpoint 'creer_compte' called");
 		String feeds = null;
 		try {
 			Gson gson = new Gson();

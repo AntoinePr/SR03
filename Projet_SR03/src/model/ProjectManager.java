@@ -65,6 +65,25 @@ public class ProjectManager {
 		return feeds;
 	}
 	
+	public String[] PostAcheterPanier(
+			String token,
+			String[] jeux) throws Exception {
+		String[] ajouts;
+		try {
+			Connection connection =  ConnexionBDD.getInstance().getCnx();
+			Project project= new Project();
+			String login = project.GetLoginFromToken(connection, token);
+			ajouts = project.AcheterPanier(
+					connection, 
+					login, 
+					jeux);
+		}
+		catch (Exception e){
+			throw e;
+		}
+		return ajouts;
+	}
+	
 	public String PostConnexion(
 			String login, 
 			String mdp) throws Exception {
