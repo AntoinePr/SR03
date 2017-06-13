@@ -76,7 +76,7 @@ public class Servlet1 extends HttpServlet {
 				    out.print(adh);
 				    out.print("</p>");
 				}
-				cnx.close();
+				ConnexionBDD.getInstance().closeCnx();
 			}
 			out.print("</body></html>");
 			out.close();
