@@ -6,10 +6,10 @@
 	<script type="text/javascript" src="../js/connexion.js" ></script>
   </head>
   <body>
-    	<form method="POST" id="con">
-        <p>Login: </p><input type="text" id="login" size="20" autofocus/>
-        <p>Mot de passe: </p><input type="password" id="mdp" size="20"/>
-        <input type="submit" name="Connexion" value="Connexion"onclick="checkEntry();">
+    	<form method="POST" id="con" onsubmit="checkEntry();">
+        <p>Login: </p><input type="text" id="login" size="20" autofocus required/>
+        <p>Mot de passe: </p><input type="password" id="mdp" size="20" required/>
+        <input type="submit" name="Connexion" value="Connexion">
       </form>
   </body>
 </html>
