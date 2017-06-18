@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Acceuil</title>
+	<script type="text/javascript" src="../js/top_ventes.js" ></script>
+  <script type="text/javascript" src="../js/recherche.js" ></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    	<div id="searchBar">
+        <form method="get">
+          <input type="search" name="search" placeholder="Search..." id="search"/>
+          <input type="button" name="Rechercher" value="Rechercher" onclick="checkEntry();">
+        </form>
+      </div>
+      <div class="errorMessage" id="errorMessage"></div>
+      <div class="games" id="games"></div>
+  </body>
+</html>

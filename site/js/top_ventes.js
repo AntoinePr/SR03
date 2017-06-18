@@ -27,11 +27,10 @@ xhr.onload=function(){
 	xhr2.onload=function(){
 		var res = JSON.parse(xhr2.responseText);
 		for(cpt=0; cpt<res.length;cpt++){
-			document.getElementById('games').innerHTML='<div class="TitreJeu">'+res[cpt].nom+"</div><div class='infos'>"+res[cpt].description+'</div>';
+			document.getElementById('games').innerHTML='<div class="TitreJeu">'+res[cpt].nom+"</div><div class='infos'>"+res[cpt].description+'</div>'+"<input type='button' name='Ajouter' value='Ajouter' onClick='addToCart("+cpt+");'/>";
 		}
 	}
 	xhr2.send(null);
 }
 xhr.open("GET", "http://localhost:28080/Projet_SR03/rest/top_ventes");
 xhr.send(null);
-alert(document.cookie);

@@ -15,9 +15,6 @@ function getXhr(){
 	}
 	return xhr;
 }
-function getToken(data){
-	alert(data);
-}
 
 function checkEntryCon(){
 	var log = document.getElementById('login');
@@ -31,12 +28,12 @@ function checkEntryCon(){
 	  success: function(data,status){
 	  	if(status=='success'){
 	  		document.cookie = "token="+data.token;
-	  		window.location = "./test.html";
+	  		window.location = "./acceuil.html";
 	  	}
 	  },
 	  error: function(data,status,error){
 	  	if(status=='error'){
-	  		document.getElementById('errorMessage').textContent = "Indentifiants inconnus";
+	  		document.getElementById('errorMessage').textContent = "Identifiants inconnus";
 	  	}
 	  },
 	  failure: function(errMsg) {
@@ -48,7 +45,6 @@ function checkEntryCon(){
 }
 
 function checkEntryIns(){
-	alert('ok');
 	var log = document.getElementById('login2');
 	var mdp1 = document.getElementById('mdp1');
 	var mdp2 = document.getElementById('mdp2');
@@ -64,14 +60,12 @@ function checkEntryIns(){
 	}
 	else{
 		var jsonString = JSON.stringify({login:log.value,mdp:mdp1.value,nom:nom.value,prenom:prenom.value,datenaissance:date.value,rue:rue.value,cp:cp.value,ville:ville.value,mail:mail.value});
-		alert(jsonString);
 		$.ajax({
 		  type: "POST",
 		  url: "http://localhost:28080/Projet_SR03/rest/creer_compte",
 		  data: jsonString,
 		  contentType: "application/json; charset=utf-8",
 		  success: function(data,status){
-		  	alert(status);
 		  	if(status=='success'){
 		  		document.getElementById('newsMessage').textContent = "Compte crée, vous pouvez maintenant vous connecter";
 		  	}
