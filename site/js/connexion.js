@@ -15,20 +15,77 @@ function getXhr(){
 	}
 	return xhr;
 }
+function getToken(data){
+	alert(data);
+}
 
-function checkEntry(){
+function checkEntryCon(){
 	var log = document.getElementById('login');
 	var mdp = document.getElementById('mdp');
-	xhr=getXhr();
-	xhr.onload=function(){
-		var top = JSON.parse(xhr.responseText);
-		var jeux="";
-		for(var cpt=0; cpt<top.length;cpt++){
-			jeux+="/"+top[cpt].jeu;
-		}
-	}
-	xhr.open("POST", "http://localhost:28080/Projet_SR03/rest/connexion");
-	xhr.setRequestHeader('Content-Type','application/json');
 	var jsonString = JSON.stringify({login:log.value,mdp:mdp.value});
-	xhr.send(jsonString);
+	$.ajax({
+	  type: "POST",
+	  url: "http://localhost:28080/Projet_SR03/rest/connexion",
+	  data: jsonString,
+	  contentType: "application/json; charset=utf-8",
+	  success: function(data,status){
+	  	if(status=='success'){
+	  		document.cookie = "token="+data.token;
+	  		window.location = "./test.html";
+	  	}
+	  },
+	  error: function(data,status,error){
+	  	if(status=='error'){
+	  		document.getElementById('errorMessage').textContent = "Indentifiants inconnus";
+	  	}
+	  },
+	  failure: function(errMsg) {
+        document.getElementById('errorMessage').textContent = "Problème de communication avec le serveur, merci de bien vouloir réessayer ultérieurement";
+	  },
+	  async: false,
+	  dataType: 'json'
+	});
+}
+
+function checkEntryIns(){
+	alert('ok');
+	var log = document.getElementById('login2');
+	var mdp1 = document.getElementById('mdp1');
+	var mdp2 = document.getElementById('mdp2');
+	var nom = document.getElementById('nom');
+	var prenom = document.getElementById('prenom');
+	var date = document.getElementById('date');
+	var rue = document.getElementById('rue');
+	var cp = document.getElementById('cp');
+	var ville = document.getElementById('ville');
+	var mail = document.getElementById('mail');
+	if(mdp1.value!=mdp2.value){
+		document.getElementById('errorMessage').textContent = "Les mots de passes doivent être identique";
+	}
+	else{
+		var jsonString = JSON.stringify({login:log.value,mdp:mdp1.value,nom:nom.value,prenom:prenom.value,datenaissance:date.value,rue:rue.value,cp:cp.value,ville:ville.value,mail:mail.value});
+		alert(jsonString);
+		$.ajax({
+		  type: "POST",
+		  url: "http://localhost:28080/Projet_SR03/rest/creer_compte",
+		  data: jsonString,
+		  contentType: "application/json; charset=utf-8",
+		  success: function(data,status){
+		  	alert(status);
+		  	if(status=='success'){
+		  		document.getElementById('newsMessage').textContent = "Compte crée, vous pouvez maintenant vous connecter";
+		  	}
+		  },
+		  error: function(data,status,error){
+		  	if(status=='error'){
+		  		document.getElementById('errorMessage').textContent = "Création du compte impossible";
+		  	}
+		  },
+		  failure: function(errMsg) {
+	        document.getElementById('errorMessage').textContent = "Problème de communication avec le serveur, merci de bien vouloir réessayer ultérieurement";
+		  },
+		  async: false,
+		  dataType: 'json'
+		});
+	}
 }

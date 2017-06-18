@@ -34,3 +34,4 @@ xhr.onload=function(){
 }
 xhr.open("GET", "http://localhost:28080/Projet_SR03/rest/top_ventes");
 xhr.send(null);
+alert(document.cookie);
