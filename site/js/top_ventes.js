@@ -15,6 +15,21 @@ function getXhr(){
 	}
 	return xhr;
 }
+function getCookie(name){
+	var value = "; " + document.cookie;
+	var parts = value.split("; " + name + "=");
+	if (parts.length == 2) return parts.pop().split(";").shift();
+}
+function initCookie(){
+	var name=getCookie("path");
+	if(name!=null){
+		var d = new Date();
+	    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	    var expires = "expires="+ d.toUTCString();
+	    document.cookie = expires + ";path=/";
+	}
+}
+initCookie();
 xhr=getXhr();
 xhr.onload=function(){
 	var top = JSON.parse(xhr.responseText);
@@ -27,7 +42,7 @@ xhr.onload=function(){
 	xhr2.onload=function(){
 		var res = JSON.parse(xhr2.responseText);
 		for(cpt=0; cpt<res.length;cpt++){
-			document.getElementById('games').innerHTML='<div class="TitreJeu">'+res[cpt].nom+"</div><div class='infos'>"+res[cpt].description+'</div>'+"<input type='button' name='Ajouter' value='Ajouter' onClick='addToCart("+cpt+");'/>";
+			$("#games").html("<div class='TitreJeu' id='"+cpt+"'>"+res[cpt].nom+"</div><div class='infos id='"+cpt+"'>"+res[cpt].description+'</div>'+"<input type='button' name='Ajouter' value='Ajouter' onClick='addToCart("+cpt+");'/>");
 		}
 	}
 	xhr2.send(null);

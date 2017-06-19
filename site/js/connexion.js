@@ -33,11 +33,11 @@ function checkEntryCon(){
 	  },
 	  error: function(data,status,error){
 	  	if(status=='error'){
-	  		document.getElementById('errorMessage').textContent = "Identifiants inconnus";
+	  		$("#errorMessage").html("Identifiants inconnus");
 	  	}
 	  },
 	  failure: function(errMsg) {
-        document.getElementById('errorMessage').textContent = "Problème de communication avec le serveur, merci de bien vouloir réessayer ultérieurement";
+        $("#errorMessage").html("Problème de communication avec le serveur, merci de bien vouloir réessayer ultérieurement");
 	  },
 	  async: false,
 	  dataType: 'json'
@@ -56,7 +56,7 @@ function checkEntryIns(){
 	var ville = document.getElementById('ville');
 	var mail = document.getElementById('mail');
 	if(mdp1.value!=mdp2.value){
-		document.getElementById('errorMessage').textContent = "Les mots de passes doivent être identique";
+		$("#errorMessage").html("Les mots de passes doivent être identique");
 	}
 	else{
 		var jsonString = JSON.stringify({login:log.value,mdp:mdp1.value,nom:nom.value,prenom:prenom.value,datenaissance:date.value,rue:rue.value,cp:cp.value,ville:ville.value,mail:mail.value});
@@ -67,16 +67,16 @@ function checkEntryIns(){
 		  contentType: "application/json; charset=utf-8",
 		  success: function(data,status){
 		  	if(status=='success'){
-		  		document.getElementById('newsMessage').textContent = "Compte crée, vous pouvez maintenant vous connecter";
+		  		$("#newsMessage").html("Compte crée, vous pouvez maintenant vous connecter");
 		  	}
 		  },
 		  error: function(data,status,error){
 		  	if(status=='error'){
-		  		document.getElementById('errorMessage').textContent = "Création du compte impossible";
+		  		$("#errorMessage").html("Création du compte impossible");
 		  	}
 		  },
 		  failure: function(errMsg) {
-	        document.getElementById('errorMessage').textContent = "Problème de communication avec le serveur, merci de bien vouloir réessayer ultérieurement";
+	        $("#errorMessage").html("Problème de communication avec le serveur, merci de bien vouloir réessayer ultérieurement");
 		  },
 		  async: false,
 		  dataType: 'json'
