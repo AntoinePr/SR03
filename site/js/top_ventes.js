@@ -39,7 +39,6 @@ $.ajax({
       success: function(data,status){
         if(status=='success'){
           for(var cpt=0; cpt<data.length;cpt++){
-          	alert(data[0].nom + " " + cpt);
 		    $.ajax({
 		      type: "GET",
 		      url: "http://localhost:28080/Projet_SR03/rest/info_jeu/"+data[cpt].jeu,
@@ -47,7 +46,7 @@ $.ajax({
 		      crossDomain: true,
 		      success: function(datas,status){
 		        if(status=='success'){
-		          $("#games").append('<div class="TitreJeu" id="'+cpt+'">'+datas[0].nom+"</div><div class='infos' id='"+0+"'>"+datas[0].description+"<br>"+datas[0].prix+"€<br>"+datas[0].datesortie+"<br>"+datas[0].raisonsociale+'</div>'+"<input type='button' name='Enlever' value='Enlever' onClick='eraseFromCart(\""+datas[0].nom+"\");'/>");
+		          $("#games").html('<div class="TitreJeu" id="'+cpt+'">'+datas[0].nom+"</div><div class='infos' id='"+cpt+"'>"+datas[0].description+"<br>"+datas[0].prix+"€<br>"+datas[0].datesortie+"<br>"+datas[0].raisonsociale+'</div>'+"<input type='button' name='Ajouter' value='Ajouter' onClick='addToCart(\""+datas[0].nom+"\");'/>");
 		        }
 		      },
 		      error: function(data,status,error){
