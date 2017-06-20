@@ -66,7 +66,7 @@ function acheter(){
     jeux=jeux+"/"+string[cpt][0];
   }
   $.ajax({
-    type: "POST",
+    type: "GET",
     url: "http://localhost:28080/Projet_SR03/rest/achats",
     contentType: "application/json; charset=utf-8",
     success: function(data,status){
@@ -86,7 +86,7 @@ function acheter(){
         $("#errorMessage").html("Problème de communication avec le serveur, merci de bien vouloir réessayer ultérieurement");
     },
     async: true,
-    headers: {'Authorization': getCookie("token")}
+    headers: {'Authorization': "Token "+getCookie("token")}
   });
 }
 function eraseFromCart(name){
