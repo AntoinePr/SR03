@@ -33,7 +33,7 @@ function initCookie(){
 initCookie();
 $.ajax({
       type: "GET",
-      url: "http://localhost:28080/Projet_SR03/rest/top_ventes",
+      url: "http://localhost:8080/Projet_SR03/rest/top_ventes",
       contentType: "application/json; charset=utf-8",
       crossDomain: true,
       success: function(data,status){
@@ -41,7 +41,7 @@ $.ajax({
           for(var cpt=0; cpt<data.length;cpt++){
 		    $.ajax({
 		      type: "GET",
-		      url: "http://localhost:28080/Projet_SR03/rest/info_jeu/"+data[cpt].jeu,
+		      url: "http://localhost:8080/Projet_SR03/rest/info_jeu/"+data[cpt].jeu,
 		      contentType: "application/json; charset=utf-8",
 		      crossDomain: true,
 		      success: function(datas,status){

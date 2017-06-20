@@ -38,7 +38,7 @@ for(var cpt=0; cpt<cptGlobal;cpt++){
   if(string[cpt][1]!=""){
     $.ajax({
       type: "GET",
-      url: "http://localhost:28080/Projet_SR03/rest/info_jeu/"+string[cpt][0],
+      url: "http://localhost:8080/Projet_SR03/rest/info_jeu/"+string[cpt][0],
       contentType: "application/json; charset=utf-8",
       crossDomain: true,
       success: function(data,status){
@@ -67,7 +67,7 @@ function voirAchats(){
   }
   $.ajax({
     type: "GET",
-    url: "http://localhost:28080/Projet_SR03/rest/achats",
+    url: "http://localhost:8080/Projet_SR03/rest/achats",
     contentType: "application/json; charset=utf-8",
     success: function(data,status){
       if(status=='success'){
@@ -103,7 +103,7 @@ function acheter(){
   alert(jeux);
   $.ajax({
     type: "POST",
-    url: "http://localhost:28080/Projet_SR03/rest/acheter_panier",
+    url: "http://localhost:8080/Projet_SR03/rest/acheter_panier",
     data: jeux,
     contentType: "application/json; charset=utf-8",
     success: function(data,status){

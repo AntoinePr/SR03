@@ -22,7 +22,7 @@ function checkEntryCon(){
 	var jsonString = JSON.stringify({login:log.value,mdp:mdp.value});
 	$.ajax({
 	  type: "POST",
-	  url: "http://localhost:28080/Projet_SR03/rest/connexion",
+	  url: "http://localhost:8080/Projet_SR03/rest/connexion",
 	  data: jsonString,
 	  contentType: "application/json; charset=utf-8",
 	  success: function(data,status){
@@ -62,7 +62,7 @@ function checkEntryIns(){
 		var jsonString = JSON.stringify({login:log.value,mdp:mdp1.value,nom:nom.value,prenom:prenom.value,datenaissance:date.value,rue:rue.value,cp:cp.value,ville:ville.value,mail:mail.value});
 		$.ajax({
 		  type: "POST",
-		  url: "http://localhost:28080/Projet_SR03/rest/creer_compte",
+		  url: "http://localhost:8080/Projet_SR03/rest/creer_compte",
 		  data: jsonString,
 		  contentType: "application/json; charset=utf-8",
 		  success: function(data,status){

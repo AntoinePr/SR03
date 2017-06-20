@@ -1,3 +1,4 @@
+
 function getCookie(name){
 	var value = "; " + document.cookie;
 	var parts = value.split("; " + name + "=");
@@ -19,7 +20,7 @@ function checkEntry(){
 	$("#newsMessage").html("");
 	$.ajax({
 	  type: "GET",
-	  url: "http://localhost:28080/Projet_SR03/rest/info_jeu/"+recherche.value,
+	  url: "http://localhost:8080/Projet_SR03/rest/info_jeu/"+recherche.value,
 	  contentType: "application/json; charset=utf-8",
 	  success: function(data,status){
 	  	if(status=='success'){
