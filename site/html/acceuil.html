@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Acceuil</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/recherche.js" ></script>
+    <script type="text/javascript" src="../js/top_ventes.js" ></script>
+    <link rel="stylesheet" media="screen" type="text/css" title="page_web" href="../css/basic.css"/>
+  </head>
+  <body>
+      <div id="liens" class="liens">
+      <ul>
+      <li><a href="./acceuil.html">Acceuil</a></li>
+      <li><a href="./connexion.html">Connexion/Inscription</a></li>
+      <li><a href="./panier.html">Panier</a></li>
+      </ul>
+      </div>
+    	<div id="searchBar">
+        <form method="get">
+          <input type="search" name="search" placeholder="Search..." id="search"/>
+          <input type="button" name="Rechercher" value="Rechercher" onclick="checkEntry();">
+        </form>
+      </div>
+      <div class="errorMessage" id="errorMessage">
+        
+      </div>
+      <div class="newsMessage" id="newsMessage"></div>
+      <div class="games" id="games">
+        
+      </div>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Connexion</title>
+  	<script type="text/javascript" src="../js/connexion.js" ></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" media="screen" type="text/css" title="page_web" href="../css/basic.css"/>
+  </head>
+  <body>
+      <div id="liens" class="liens">
+        <ul>
+      <li><a href="./acceuil.html">Acceuil</a></li>
+      <li><a href="./connexion.html">Connexion/Inscription</a></li>
+      <li><a href="./panier.html">Panier</a></li>
+      </ul>
+      </div>
+      <div class="errorMessage" id="errorMessage"></div>
+      <div class="newsMessage" id="newsMessage"></div>
+    	<form method="POST" id="con" >
+        <p>Login: </p><input type="text" id="login" size="20" pattern="[A-Za-z]+" autofocus required/>
+        <p>Mot de passe: </p><input type="password" id="mdp" size="20" required/>
+        <input type="button" name="Connexion" value="Connexion" onclick="checkEntryCon();">
+      </form>
+      <form method="POST" id="ins">
+        <p>Login: </p><input type="text" id="login2" maxlength="20" pattern="[A-Za-z ]+" required/>
+        <p>Mot de passe: </p><input type="password" id="mdp1" maxlength="20" required/>
+        <p>Vérifiez le mot de passe: </p><input type="password" id="mdp2" maxlength="20" required/>
+        <p>Nom: </p><input type="text" id="nom" maxlength="40" pattern="[A-Za-z ]+" required/>
+        <p>Prenom: </p><input type="text" id="prenom" maxlength="20" pattern="[A-Za-z ]+" required/>
+        <p>Date de naissance: </p><input type="date" id="date" maxlength="10" placeholder="1990-10-10" required/>
+        <p>Rue: </p><input type="text" id="rue" maxlength="40" pattern="[A-Za-z0-9 ]+" required/>
+        <p>Code Postal: </p><input type="number" id="cp" max="99999" required/>
+        <p>Ville: </p><input type="text" id="ville" maxlength="20" pattern="[A-Za-z ]+" required/>
+        <p>Adresse mail: </p><input type="email" id="mail" maxlength="30" required/>
+        <input type="button" name="Inscription" value="Inscription" onclick="checkEntryIns();">
+      </form>
+  </body>
+</html>
