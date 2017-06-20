@@ -46,7 +46,7 @@ $.ajax({
 		      crossDomain: true,
 		      success: function(datas,status){
 		        if(status=='success'){
-		          $("#games").html('<div class="TitreJeu" id="'+cpt+'">'+datas[0].nom+"</div><div class='infos' id='"+cpt+"'>"+datas[0].description+"<br>"+datas[0].prix+"€<br>"+datas[0].datesortie+"<br>"+datas[0].raisonsociale+'</div>'+"<input type='button' name='Ajouter' value='Ajouter' onClick='addToCart(\""+datas[0].nom+"\");'/>");
+		          $("#games").append('<div class="TitreJeu" id="'+cpt+'">'+datas[0].nom+"</div><div class='infos' id='"+cpt+"'>"+datas[0].description+"<br>"+datas[0].prix+"€<br>"+datas[0].datesortie+"<br>"+datas[0].raisonsociale+'</div>'+"<input type='button' name='Ajouter' value='Ajouter' onClick='addToCart(\""+datas[0].nom+"\");'/>");
 		        }
 		      },
 		      error: function(data,status,error){

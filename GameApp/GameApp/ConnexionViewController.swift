@@ -17,7 +17,7 @@ class ConnexionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UserDefaults.standard.set("7qj6nnih59mabub1qaloogcov0", forKey: "token")
+        UserDefaults.standard.set("pomludibc2e4f88jst5pspj9b2", forKey: "token")
         self.performSegue(withIdentifier: "appEntryPoint", sender: self)
     }
 
