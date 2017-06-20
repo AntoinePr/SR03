@@ -59,7 +59,7 @@ for(var cpt=0; cpt<cptGlobal;cpt++){
     });
   }
 }
-function acheter(){
+function voirAchats(){
   var string = getGames();
   var cptGlobal=string.length;
   for(var cpt=0; cpt<cptGlobal;cpt++){
@@ -71,9 +71,8 @@ function acheter(){
     contentType: "application/json; charset=utf-8",
     success: function(data,status){
       if(status=='success'){
-        alert(data);
         for(cpt=0; cpt<data.length;cpt++){
-          //$("#games").html('<div class="TitreJeu" id="'+cpt+'">'+data[cpt].nom+"</div><div class='infos' id='"+cpt+"'>"+data[cpt].description+"<br>"+data[cpt].prix+"€<br>"+data[cpt].datesortie+"<br>"+data[cpt].raisonsociale+'</div>'+"<input type='button' name='Enlever' value='Enlever' onClick='eraseFromCart(\""+data[cpt].nom+"\");'/>");
+          $("#games").html('<div class="TitreJeu" id="'+cpt+'">'+data[cpt].nom+"</div><div class='infos' id='"+cpt+"'>"+data[cpt].description+"<br>"+data[cpt].prix+"€<br>"+data[cpt].datesortie+"<br>"+data[cpt].raisonsociale+'</div>');
         }
       }
     },
@@ -86,6 +85,44 @@ function acheter(){
         $("#errorMessage").html("Problème de communication avec le serveur, merci de bien vouloir réessayer ultérieurement");
     },
     async: true,
+    headers: {'Authorization': "Token "+getCookie("token")}
+  });
+}
+function acheter(){
+  var string = getGames();
+  var cptGlobal=string.length;
+  jeux='{"jeux":['
+  if (cptGlobal>0)
+    jeux+='"'+string[0][0]+'"';
+  else
+    return null;
+  for(var cpt=1; cpt<cptGlobal;cpt++){
+    jeux+=',"'+string[cpt][0]+'"';
+  }
+  jeux+=']}';
+  alert(jeux);
+  $.ajax({
+    type: "POST",
+    url: "http://localhost:28080/Projet_SR03/rest/acheter_panier",
+    data: jeux,
+    contentType: "application/json; charset=utf-8",
+    success: function(data,status){
+      if(status=='success'){
+        for(cpt=0; cpt<data.length;cpt++){
+          $("#games").html('Jeux achetés: <div class="TitreJeu" id="'+cpt+'">'+data[cpt].nom+"</div>");
+        }
+      }
+    },
+    error: function(data,status,error){
+      if(status=='error'){
+        $("#errorMessage").html("Panier invalide");
+      }
+    },
+    failure: function(errMsg) {
+        $("#errorMessage").html("Problème de communication avec le serveur, merci de bien vouloir réessayer ultérieurement");
+    },
+    async: true,
+    dataType: 'json',
     headers: {'Authorization': "Token "+getCookie("token")}
   });
 }

@@ -42,13 +42,13 @@ a:hover, a:focus, a:active {
 
 /* specific divs */
 .newsMessage { 
-    background-color: #00FF80; 
+    color: #00FF80; 
     padding: 0 175px 0 110px;  
     margin: 0; 
     position: relative;
     }
 .errorMessage { 
-    background-color: #FE642E; 
+    color: #FE642E; 
     padding: 0 175px 0 110px;  
     margin: 0; 
     position: relative;
