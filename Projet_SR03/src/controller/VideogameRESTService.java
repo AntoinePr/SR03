@@ -42,6 +42,7 @@ public class VideogameRESTService {
 
 	// Sert à tester le bon fonctionnement du serveur
 	@GET
+	@Secured
 	@Path("/test")
 	@Produces(MediaType.TEXT_PLAIN)
     public String getMessage() {
