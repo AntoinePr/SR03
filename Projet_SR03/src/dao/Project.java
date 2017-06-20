@@ -104,7 +104,7 @@ public class Project {
 			query = "SELECT jeu, COUNT(*) AS nb_ventes "
 					+ "FROM achats GROUP BY jeu "
 					+ "ORDER BY nb_ventes DESC "
-					+ "LIMIT 1";
+					+ "LIMIT 10";
 			PreparedStatement ps = connection.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()){
