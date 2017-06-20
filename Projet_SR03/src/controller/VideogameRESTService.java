@@ -61,6 +61,7 @@ public class VideogameRESTService {
 			// Extract token from header
 	        String authorizationHeader = 
 	            requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
+		System.out.println(authorizationHeader);
 	        if (authorizationHeader == null || !authorizationHeader.startsWith("Token ")) {
 	        	throw new NotAuthorizedException("Authorization header must be provided");
 	        }

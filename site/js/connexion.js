@@ -56,7 +56,7 @@ function checkEntryIns(){
 	var ville = document.getElementById('ville');
 	var mail = document.getElementById('mail');
 	if(mdp1.value!=mdp2.value){
-		$("#errorMessage").html("Les mots de passes doivent être identique");
+		$("#errorMessage").html("Les mots de passes doivent être identiques");
 	}
 	else{
 		var jsonString = JSON.stringify({login:log.value,mdp:mdp1.value,nom:nom.value,prenom:prenom.value,datenaissance:date.value,rue:rue.value,cp:cp.value,ville:ville.value,mail:mail.value});
