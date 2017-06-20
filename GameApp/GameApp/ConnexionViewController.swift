@@ -17,17 +17,8 @@ class ConnexionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("============================")
-        print(UserDefaults.standard.bool(forKey: "isUserConnected"))
-        print("============================")
-        let connected = UserDefaults.standard.value(forKey: "isUserConnected") as! Bool
-        if connected {
-            print("============================")
-            print("Trying to change view")
-            print(connected)
-            print("============================")
-            self.performSegue(withIdentifier: "appEntryPoint", sender: self)
-        }
+        UserDefaults.standard.set("7qj6nnih59mabub1qaloogcov0", forKey: "token")
+        self.performSegue(withIdentifier: "appEntryPoint", sender: self)
     }
 
     override func didReceiveMemoryWarning() {
